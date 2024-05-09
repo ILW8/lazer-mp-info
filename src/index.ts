@@ -19,12 +19,56 @@ export interface Env {
 	// MY_BUCKET: R2Bucket;
 }
 
+interface RoomResponse {
+	id: number,
+	name: string
+	playlist: [RoomPlaylistItem]
+	// todo: finish this
+}
+
+interface RoomPlaylistItem {
+	"id": number,
+	"room_id": number,
+	"beatmap_id": number,
+	"ruleset_id": number,
+	"expired": boolean,
+	"owner_id": number,
+	"playlist_order": number,
+	"played_at": string,
+	// todo: finish this
+}
+
+interface PlaylistItemScore {
+	playlist_item_id: number,
+	room_id: number,
+	solo_score_id: number | undefined,
+	user_id: number,
+	total_score: number,
+	// todo: finish this
+}
+
+interface PlaylistItemScoresPaginator {
+	total: number,
+	scores: [PlaylistItemScore?]
+	cursor: number | undefined
+	cursor_string: string | undefined
+	// todo: finish/validate this
+}
+
 export default {
 	async fetch(
 		request: Request,
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-		return new Response("Hello World!");
+		// todo: get room playlist items
+		// GET https://osu.ppy.sh/api/v2/rooms/{room_id}
+		// get array of playlist items in response.playlist
+
+		// todo: get player scores for each playlist item
+		// GET https://osu.ppy.sh/api/v2/rooms/{room_id}/playlist/{playlist_item_id}/scores
+		// returns a PlaylistItemScoresPaginator
+
+		return new Response("727");
 	},
 };
